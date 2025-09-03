@@ -61,6 +61,16 @@ async def health_check():
         return {"status": "healthy", "redis": "connected"}
     except Exception as e:
         return {"status": "unhealthy", "error": str(e)}
+@app.get("/hi")
+async def health_check():
+    """Health check endpoint"""
+    try:
+        from app.services.redis_service import redis_service
+        # Test Redis connection
+        await redis_service.redis_client.ping()
+        return {"status": "healthy", "redis": "connected"}
+    except Exception as e:
+        return {"status": "unhealthy", "error": str(e)}
 
 if __name__ == "__main__":
     import uvicorn
