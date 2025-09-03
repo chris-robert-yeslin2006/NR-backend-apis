@@ -55,6 +55,8 @@ async def root():
 async def health_check():
     """Health check endpoint"""
     try:
+
+        
         from app.services.redis_service import redis_service
         # Test Redis connection
         await redis_service.redis_client.ping()
