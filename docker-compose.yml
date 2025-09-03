@@ -9,7 +9,7 @@ services:
       - redis_data:/data
   
   backend:
-    build: .
+    image: yeslinparker/backend-nr:latest
     ports:
       - "8000:8000"
     depends_on:
