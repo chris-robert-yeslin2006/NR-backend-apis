@@ -15,7 +15,7 @@ services:
     depends_on:
       - redis
     environment:
-      - REDIS_URL=redis://redis:6379
+      - REDIS_URL=redis://chris:Robert@2006@redis-18998.c80.us-east-1-2.ec2.redns.redis-cloud.com:18998
 
 volumes:
   redis_data:
