@@ -14,11 +14,13 @@ async def upload_file(file: UploadFile = File(...)):
 async def get_file_data(file_id: str, limit: int = 1000):
     """Get file data by file ID"""
     file_data = await redis_service.get_file_data(file_id)
+    print(file_data)
     
     if not file_data:
         raise HTTPException(status_code=404, detail="File not found")
     
     data = file_data.get('data', [])
+    print(data)
     return {
         'file_id': file_id,
         'data': data[:limit],
