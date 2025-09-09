@@ -82,15 +82,17 @@ class FileService:
     
     @staticmethod
     async def _process_csv(content: bytes) -> Tuple[List[Dict], List[str]]:
-        """Process CSV file"""
+        """Process CSV file with comma delimiter"""
         try:
-            df = pd.read_csv(pd.io.common.StringIO(content.decode('utf-8')))
+            from io import StringIO
+            # Explicitly specify separator as comma and skip blank lines
+            df = pd.read_csv(StringIO(content.decode('utf-8')), sep=',', skip_blank_lines=True)
             columns = df.columns.tolist()
             data = df.to_dict('records')
             return data, columns
         except Exception as e:
             raise ValueError(f"Error processing CSV: {str(e)}")
-    
+
     @staticmethod
     async def _process_json(content: bytes) -> Tuple[List[Dict], List[str]]:
         """Process JSON file"""

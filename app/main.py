@@ -4,7 +4,7 @@ from fastapi.responses import JSONResponse
 import logging
 import traceback
 
-from app.routers import files, nodes, visualizations
+from app.routers import files, nodes, visualizations, models
 from app.config import settings
 
 # Configure logging
@@ -32,6 +32,7 @@ app.add_middleware(
 app.include_router(files.router)
 app.include_router(nodes.router)
 app.include_router(visualizations.router)
+app.include_router(models.router)
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
